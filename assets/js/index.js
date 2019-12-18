@@ -152,7 +152,23 @@ class CarouselController {
   };
 
   goPrev = () => {
+    const currentIndex = this._carousel.currentIndex;
 
+    const prevSlide = document.getElementById(
+      Carousel.getPrevIndex(currentIndex, this._carousel.length));
+    const currentSlide = document.getElementById(this._carousel.currentIndex);
+    const nextSlide = document.getElementById(
+      Carousel.getNextIndex(currentIndex, this._carousel.length));
+    const newPrev = document.getElementById(
+      Carousel.getPrevIndex(
+        Carousel.getPrevIndex(currentIndex, this._carousel.length),
+        this._carousel.length));
+
+    prevSlide.classList.replace('prevSlide', 'currentSlide');
+    currentSlide.classList.replace('currentSlide', 'nextSlide');
+    nextSlide.classList.remove('nextSlide');
+    newPrev.classList.add('prevSlide');
+    this._carousel.goPrev();
   };
 
   render () {
